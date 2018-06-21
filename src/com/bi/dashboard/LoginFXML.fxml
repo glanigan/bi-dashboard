@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" stylesheets="@loginStyle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bi.dashboard.LoginController">
+    <children>
+        <HBox>
+            <children>
+                <StackPane>
+                   <children>
+                       <ImageView fitHeight="402.0" fitWidth="423.0" pickOnBounds="true">
+                           <image>
+                               <Image url="@mountain.jpg" />
+                           </image>
+                       </ImageView>
+                       <Pane styleClass="leftBox" />
+                       <VBox prefHeight="402.0" prefWidth="406.0">
+                           <children>
+                               <Label styleClass="headingText" text="BI Dashboard" />
+                               <Label styleClass="headingText" text="Discover the power of data" />
+                           </children>
+                       </VBox>
+                   </children>
+                </StackPane>
+                <VBox prefHeight="402.0" prefWidth="245.0" styleClass="rightBox">
+               <children>
+                  <Label styleClass="whiteText" text="Username" />
+                  <TextField fx:id="fieldUsername" promptText="Please enter your username" />
+                  <Label styleClass="whiteText" text="Password" />
+                  <PasswordField fx:id="fieldPassword" prefHeight="29.0" prefWidth="209.0" promptText="Please enter your password">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets></PasswordField>
+                  <Button fx:id="btnLogin" onAction="#login" prefHeight="27.0" prefWidth="128.0" styleClass="loginButton" text="Login" />
+               </children>
+            </VBox>
+            </children>
+        </HBox>
+    </children>
+</VBox>

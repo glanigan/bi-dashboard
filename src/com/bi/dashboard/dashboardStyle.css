@@ -1,0 +1,80 @@
+.progressIndicator{
+    -fx-halignment: center;
+    -fx-valignment: center;
+    -fx-alignment: CENTER;
+}
+.overviewPane{
+    -fx-border-color: #ababab;
+    -fx-background-color: #ffffff;
+}
+.headingText{
+    -fx-fill: #4b4b4b;
+    -fx-font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+    -fx-font-size: 1.4em;
+    -fx-font-weight: 500;
+}
+.textHighlight{
+    -fx-font-family: "Century Gothic",CenturyGothic AppleGothic sans-serif;
+    -fx-font-size: 2em;
+    -fx-font-weight: 700;
+    -fx-fill: #4b4b4b;
+}
+.headingMapText{
+    -fx-font-family: "Century Gothic",CenturyGothic AppleGothic sans-serif;
+    -fx-font-size: 1.4em;
+    -fx-font-weight: 700;
+    -fx-text-fill:#003b83;
+}
+.textMap{
+    -fx-font-family: "Century Gothic",CenturyGothic AppleGothic sans-serif;
+    -fx-font-size: 2em;
+    -fx-font-weight: 700;
+    -fx-fill: #003b83;
+}
+.whiteText{
+    -fx-fill:#ffffff;
+    -fx-text-fill: #ffffff;
+    -fx-font-family: "Century Gothic",CenturyGothic, AppleGothic, sans-serif;
+    -fx-font-size: 1.2em;
+}
+.menu-bar{
+    -fx-background-color: #3c3c3c;
+    -fx-font-size: 1.2em;
+    -fx-font-weight: 600;
+}
+.menu .label{
+    -fx-text-fill: #ffffff;
+    -fx-font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+}
+.context-menu {
+    -fx-skin: "com.sun.javafx.scene.control.skin.ContextMenuSkin";
+    -fx-background-color:#3c3c3c;
+
+}
+.choice-box{
+    -fx-background-color: #4c4c4c;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 1.2em;
+    -fx-font-weight: 600;
+}
+.choice-box .label{
+    -fx-text-fill: #ffffff;
+}
+.cancelButton{
+    -fx-background-radius: 5em;
+    -fx-font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+    -fx-font-weight:700;
+    -fx-min-width: 1.5em;
+    -fx-min-height: 1.5em;
+    -fx-max-width: 1.5em;
+    -fx-max-height: 1.5em;
+    -fx-background-color: #ff3333;
+    -fx-background-insets: 0px;
+    -fx-padding: 0px;
+}
+.footer{
+    -fx-background-color: #3c3c3c;
+    -fx-text-fill: #ffffff;
+    -fx-font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+    -fx-font-size: 1.2em;
+}

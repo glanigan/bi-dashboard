@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.CheckMenuItem?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1151.0" prefWidth="800.0" stylesheets="@dashboardStyle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bi.dashboard.DashboardController">
+   <children>
+      <MenuBar prefHeight="20.0" prefWidth="800.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+                  <MenuItem mnemonicParsing="false" onAction="#logout" text="Logout" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+              <MenuItem mnemonicParsing="false" onAction="#close" text="Close" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Data">
+               <items>
+                  <CheckMenuItem fx:id="menuAutoRefresh" mnemonicParsing="false" selected="true" text="Auto Refresh" />
+                  <MenuItem fx:id="menuSetRefresh" mnemonicParsing="false" onAction="#displaySetRefreshTimeMenu" text="Set Auto Refresh Time" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem fx:id="menuRefreshData" mnemonicParsing="false" onAction="#refreshData" text="Refresh Data" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Configuration">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#displayVehicleValueMenu" text="Set Average Vehicle Value" />
+                  <MenuItem mnemonicParsing="false" onAction="#displayCostPerSaleMenu" text="Set Average Cost-Per-Sale" />
+               </items>
+            </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#about" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <TabPane prefHeight="562.0" prefWidth="800.0" tabClosingPolicy="ALL_TABS" VBox.vgrow="ALWAYS">
+        <tabs>
+          <Tab closable="false" text="Dashboard">
+               <content>
+                  <StackPane prefHeight="150.0" prefWidth="200.0">
+                     <children>
+                        <ScrollPane fitToWidth="true" maxWidth="1.7976931348623157E308" prefHeight="1344.0" prefWidth="800.0" vbarPolicy="ALWAYS">
+                           <content>
+                              <VBox fx:id="dashboardPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="1106.0" prefWidth="785.0" visible="false">
+                                 <children>
+                                    <HBox maxHeight="-Infinity" prefHeight="150.0" prefWidth="800.0" VBox.vgrow="ALWAYS">
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" />
+                                       </VBox.margin>
+                                       <children>
+                                          <VBox alignment="CENTER" minHeight="-Infinity" prefHeight="111.0" prefWidth="189.0" styleClass="overviewPane" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Label prefHeight="15.0" prefWidth="154.0" styleClass="headingText" text="Dashboard Filter" />
+                                                <Separator prefWidth="200.0" />
+                                                <HBox alignment="CENTER" prefHeight="51.0" prefWidth="182.0" VBox.vgrow="NEVER">
+                                                   <children>
+                                                      <Label prefHeight="27.0" prefWidth="108.0" styleClass="labelText" text="Year">
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <ChoiceBox fx:id="yearSelector" prefHeight="20.0" prefWidth="60.0" />
+                                                   </children>
+                                                </HBox>
+                                                <Separator prefHeight="1.0" prefWidth="182.0" />
+                                                <HBox alignment="CENTER" prefHeight="58.0" prefWidth="182.0">
+                                                   <children>
+                                                      <Label prefHeight="27.0" prefWidth="107.0" styleClass="labelText" text="Quarter">
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <ChoiceBox fx:id="qtrSelector" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="5.0" prefWidth="60.0" />
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                          </VBox>
+                                          <VBox alignment="TOP_CENTER" minHeight="-Infinity" prefHeight="90.0" prefWidth="200.0" styleClass="overviewPane" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Label styleClass="headingText" text="Highest Selling Region">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <Separator prefWidth="200.0" />
+                                                <Text fx:id="highestSellingRegion" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textHighlight" text="N/A" textAlignment="CENTER" wrappingWidth="180.603515625" VBox.vgrow="ALWAYS">
+                                                   <font>
+                                                      <Font size="22.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets top="10.0" />
+                                                   </VBox.margin>
+                                                </Text>
+                                             </children>
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                          </VBox>
+                                          <VBox alignment="TOP_CENTER" minHeight="-Infinity" prefHeight="90.0" prefWidth="200.0" styleClass="overviewPane" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Label styleClass="headingText" text="Best Selling Vehicle">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <Separator prefWidth="200.0" />
+                                                <Text fx:id="bestSellingVehicle" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textHighlight" text="N/A" textAlignment="CENTER" wrappingWidth="180.603515625">
+                                                   <font>
+                                                      <Font size="22.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets top="10.0" />
+                                                   </VBox.margin>
+                                                </Text>
+                                             </children>
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                          </VBox>
+                                          <VBox alignment="TOP_CENTER" minHeight="-Infinity" prefHeight="90.0" prefWidth="192.0" styleClass="overviewPane" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Label prefHeight="20.0" prefWidth="89.0" styleClass="headingText" text="Total Sales" textAlignment="CENTER">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <Separator prefWidth="200.0" />
+                                                <Text fx:id="totalSales" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textHighlight" text="0" textAlignment="CENTER" wrappingWidth="110.859375">
+                                                   <font>
+                                                      <Font size="22.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets top="10.0" />
+                                                   </VBox.margin>
+                                                </Text>
+                                             </children>
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="329.0" prefWidth="800.0">
+                                       <children>
+                                          <VBox alignment="TOP_CENTER" prefHeight="319.0" prefWidth="391.0" styleClass="overviewPane" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <PieChart fx:id="pieChart" animated="false" legendVisible="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="307.0" prefWidth="405.0" title="Region Sales" VBox.vgrow="ALWAYS">
+                                                   <VBox.margin>
+                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                   </VBox.margin>
+                                                </PieChart>
+                                             </children>
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                          </VBox>
+                                          <VBox alignment="CENTER" minHeight="-Infinity" prefHeight="350.0" prefWidth="372.0" styleClass="overviewPane" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Label styleClass="headingText" text="Region Sales" />
+                                                <Separator prefWidth="200.0" />
+                                                <StackPane prefHeight="323.0" prefWidth="374.0">
+                                                   <children>
+                                                      <ImageView fitHeight="198.0" fitWidth="382.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@map.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                      <Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="323.0" prefWidth="335.0">
+                                                         <children>
+                                                            <Label layoutX="13.0" layoutY="68.0" styleClass="headingMapText" text="America" />
+                                                            <Text id="usSales" fx:id="usSales" layoutX="11.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textMap" text="Text" wrappingWidth="74.13671875" y="100.0" />
+                                                            <Text id="europeSales" fx:id="europeSales" layoutX="152.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textMap" text="Text" />
+                                                            <Text id="asiaSales" fx:id="asiaSales" layoutX="253.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textMap" text="Text" />
+                                                            <Label layoutX="260.0" layoutY="68.0" styleClass="headingMapText" text="Asia" />
+                                                            <Label layoutX="147.0" layoutY="68.0" styleClass="headingMapText" text="Europe" />
+                                                         </children>
+                                                      </Pane>
+                                                   </children>
+                                                </StackPane>
+                                             </children>
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <VBox alignment="TOP_CENTER" prefHeight="90.0" prefWidth="383.0" styleClass="overviewPane" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Label prefHeight="42.0" prefWidth="164.0" styleClass="headingText" text="Estimated Revenue" textAlignment="CENTER">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <Separator prefWidth="200.0" VBox.vgrow="ALWAYS" />
+                                                <VBox alignment="CENTER" prefHeight="108.0" prefWidth="343.0">
+                                                   <children>
+                                                      <Text fx:id="estimatedRevenue" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textHighlight" text="£0.00" textAlignment="CENTER" wrappingWidth="212.859375">
+                                                         <font>
+                                                            <Font size="22.0" />
+                                                         </font>
+                                                         <VBox.margin>
+                                                            <Insets />
+                                                         </VBox.margin>
+                                                      </Text>
+                                                   </children>
+                                                   <padding>
+                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                   </padding>
+                                                </VBox>
+                                             </children>
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                          </VBox>
+                                          <VBox alignment="TOP_CENTER" prefHeight="90.0" prefWidth="387.0" styleClass="overviewPane" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Label prefHeight="42.0" prefWidth="164.0" styleClass="headingText" text="Estimated Profit" textAlignment="CENTER">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets />
+                                                   </VBox.margin>
+                                                </Label>
+                                                <Separator prefWidth="200.0" VBox.vgrow="ALWAYS" />
+                                                <VBox alignment="CENTER" prefHeight="64.0" prefWidth="396.0">
+                                                   <children>
+                                                      <Text fx:id="estimatedProfit" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textHighlight" text="£0.00" textAlignment="CENTER" wrappingWidth="212.859375">
+                                                         <font>
+                                                            <Font size="22.0" />
+                                                         </font>
+                                                         <VBox.margin>
+                                                            <Insets />
+                                                         </VBox.margin>
+                                                      </Text>
+                                                   </children>
+                                                   <padding>
+                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                   </padding>
+                                                   <VBox.margin>
+                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                   </VBox.margin>
+                                                </VBox>
+                                             </children>
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                    <HBox maxHeight="-Infinity" prefHeight="444.0" prefWidth="785.0" VBox.vgrow="ALWAYS">
+                                       <children>
+                                          <VBox alignment="TOP_CENTER" maxHeight="-Infinity" prefHeight="420.0" prefWidth="383.0" styleClass="overviewPane" HBox.hgrow="ALWAYS">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                             <children>
+                                                <BarChart fx:id="barChart" animated="false" prefHeight="362.0" prefWidth="381.0" title="Vehicle Sales">
+                                                  <xAxis>
+                                                    <CategoryAxis label="Vehicle" side="BOTTOM" />
+                                                  </xAxis>
+                                                  <yAxis>
+                                                    <NumberAxis label="Number of Sales" side="LEFT" />
+                                                  </yAxis>
+                                                </BarChart>
+                                                <HBox fx:id="barChartHBox" alignment="CENTER" prefHeight="28.0" prefWidth="381.0" />
+                                             </children>
+                                          </VBox>
+                                          <VBox alignment="TOP_CENTER" maxHeight="-Infinity" prefHeight="420.0" prefWidth="383.0" styleClass="overviewPane" HBox.hgrow="ALWAYS">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                             <children>
+                                                <LineChart fx:id="lineChart" animated="false" prefHeight="336.0" prefWidth="381.0" title="Sales by Year">
+                                                  <xAxis>
+                                                    <CategoryAxis label="Year" side="BOTTOM" />
+                                                  </xAxis>
+                                                  <yAxis>
+                                                    <NumberAxis label="Sales" side="LEFT" />
+                                                  </yAxis>
+                                                </LineChart>
+                                                <HBox fx:id="lineChartHBox" alignment="CENTER" prefHeight="39.0" prefWidth="381.0" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </content>
+                        </ScrollPane>
+                        <Pane fx:id="loadingDash" prefHeight="1352.0" prefWidth="800.0">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <children>
+                              <ProgressIndicator layoutY="100.0" prefHeight="96.0" prefWidth="800.0" styleClass="progressIndicator" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </StackPane>
+               </content>
+          </Tab>
+          <Tab text="Data">
+               <content>
+                  <StackPane prefHeight="150.0" prefWidth="200.0">
+                     <children>
+                        <VBox fx:id="dataPane" prefHeight="200.0" prefWidth="100.0" visible="false">
+                           <children>
+                              <TableView fx:id="dataTable" prefHeight="522.0" prefWidth="762.0">
+                                <columns>
+                                  <TableColumn fx:id="columnQuarter" prefWidth="138.0" text="Quarter" />
+                                  <TableColumn fx:id="columnRegion" prefWidth="113.0" text="Region" />
+                                    <TableColumn fx:id="columnVehicle" prefWidth="99.0" text="Vehicle" />
+                                    <TableColumn fx:id="columnYear" prefWidth="86.0" text="Year" />
+                                    <TableColumn fx:id="columnQuantity" minWidth="0.0" prefWidth="100.0" text="Quantity" />
+                                </columns>
+                              </TableView>
+                           </children>
+                        </VBox>
+                        <Pane fx:id="loadingData" prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <ProgressIndicator layoutY="100.0" prefHeight="96.0" prefWidth="800.0" styleClass="progressIndicator" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </StackPane>
+               </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+      <StackPane prefHeight="30.0" prefWidth="800.0">
+         <children>
+            <HBox alignment="BOTTOM_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="32.0" prefWidth="800.0" styleClass="footer">
+               <children>
+                  <Label styleClass="whiteText" text="Last Updated:">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Text fx:id="lastUpdated" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="whiteText" text="00:00:00" wrappingWidth="74.13671875">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="10.0" />
+                     </HBox.margin>
+                  </Text>
+               </children>
+            </HBox>
+            <HBox fx:id="footerLoading" alignment="BOTTOM_LEFT" prefHeight="44.0" prefWidth="800.0">
+               <children>
+                  <ProgressBar maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="18.0" prefWidth="166.0">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="10.0" />
+                     </HBox.margin>
+                  </ProgressBar>
+                  <Button contentDisplay="CENTER" maxHeight="21.0" maxWidth="22.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#cancelDataService" prefHeight="21.0" prefWidth="22.0" styleClass="cancelButton" text="X" textAlignment="CENTER" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </StackPane>
+   </children>
+</VBox>
